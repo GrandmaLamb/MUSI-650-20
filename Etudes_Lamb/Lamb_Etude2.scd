@@ -80,15 +80,15 @@ s.boot;
 ~np.removeLast;
 
 
-
+//a rebuild of an example from nodeproxybasics. Very similar ot original but with varried waveshapes and values. built from memory as best as i could.
 
 ~np= NodeProxy.new.play
 
 ( ~np [0..2] =
     {
-	|lofreq=0.5, freak=35|
+	|lo=0.5, frek=35|
 	var rhythm = exprand(0.5, 4);
-	var pitch = SinOsc.ar(lofreq*rhythm).exprange(1,freak);
+	var pitch = SinOsc.ar(lo*rhythm).exprange(1,frek);
 	var pulse = LFSaw.ar(rhythm).range(0,0.1);
 	LFSaw.ar(50*pitch, 0, pulse);
 };
