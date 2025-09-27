@@ -61,6 +61,7 @@ a.source = {
 	};
 )
 
+
 a.scope;
 
 //actually the version below has an OFFSET that i rather link that is more functional.
@@ -75,6 +76,18 @@ a.source = {
 	};
 )
 
+//my attempt at freq modulation
+(
+a.source = {
+	var pitch, mod, tempo, intensity, b;
+	tempo = MouseX.kr(0, 60);
+	intensity = MouseY.kr(0, 0.5);
+ 	mod = SinOsc.ar(tempo, 0, intensity);
+	b = SinOsc.ar(MouseX.kr(150, 400), 0, 0.5);
+	pitch = SinOsc.ar(440+b, 0, 0.5 + mod);
+	pitch;
+	};
+)
 
 //now we will change pitch.
 //the key is that the root of the first oscillators pitch is ADDED with the offset of another
@@ -111,6 +124,22 @@ a.source =
 	LFTri.ar(200+freqMod, 0, 1.0);};
 ) //simple FM w offset
 a.play
+
+
+// in class build
+(
+a.source =
+{ var sig, mod, kY, kX;
+	kY = MouseY.kr(20, 4000, 0);
+	kX = MouseX.kr(0.1, 20, 0);
+	mod = SinOsc.ar(kX, 0, 1000, kY);
+	sig = PinkNoise.ar(0.5);
+	RLPF.ar(sig, mod, 0.1)
+};
+) //simple FM w offset
+a.play
+
+
 
 a.source ={};
 
